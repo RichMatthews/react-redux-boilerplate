@@ -1,3 +1,4 @@
 export default {
   LOCATION_CHANGE: '@@LOCATION_CHANGE',
+  SHOW_PRODUCTS: '@@SHOW_PRODUCTS',
 };

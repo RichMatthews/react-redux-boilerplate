@@ -7,7 +7,6 @@ const initialState = {
 export default(state = initialState, action) => {
   switch(action.type){
     case LOCATION_CHANGE: {
-      console.log('changed');
       const path = window.location.href;
       const categoriesRegex = /categories\/(\w+)(?=\/?)/;
       try{
@@ -22,6 +21,6 @@ export default(state = initialState, action) => {
       }
     }
     default:
-      return 'sport';
+      return state;
   }
 }

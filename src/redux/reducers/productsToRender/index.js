@@ -1,23 +1,35 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
+import Types from '../../types';
+import data from '../../../data';
 const initialState = [];
 
 export default(state = initialState, action) => {
+  console.log(action);
   switch(action.type){
-    case LOCATION_CHANGE: {
-      const path = window.location.href;
-      const categoriesRegex = /categories\/(\w+)(?=\/?)/;
+    case Types.SHOW_PRODUCTS: {
       try{
-        const category = path.match(categoriesRegex)[1];
-        return {
-          product: Number(path.split('/')[5]),
-          category: category,
+        switch(action.filter.type){
+          case 'color': {
+            const productsToShow = data.filter(category => category.link === action.category);
+            const filteredProducts = productsToShow[0].products.filter(products => products[action.filter.type] === action.filter.value)
+            return filteredProducts;
+          }
+          case 'cost': {
+            const productsToShow = data.filter(category => category.link === action.category);
+            const filteredProducts = productsToShow[0].products.filter(products => products[action.filter.type] <= action.filter.value)
+            return filteredProducts;
+          }
+          default:
+            let productsToShow = data.filter(category => category.link === action.category);
+            const newState = [].concat(productsToShow[0].products);
+            return newState;
         }
       }
       catch(e){
-        return state;
+        return state
       }
     }
     default:
-      return 'sport';
+      return state;
   }
 }

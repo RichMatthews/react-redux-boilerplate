@@ -8,62 +8,39 @@ import './index.css';
 
 class Products extends React.Component {
 
-  state = {
-    productsToShow: []
+  componentDidMount = () => {
+    // main thing to solve why it's calling this component at the wrong time
+    const splitFilter = window.location.href.split('?')
+    const type = splitFilter[1].split('=')[0]
+    const value = splitFilter[1].split('=')[1]
+    this.props.showProducts(this.props.chosenCategory.category, type, value)
   }
 
-  productsToRender = () => {
-    try {
-      const chosenCategory = this.props.chosenCategory.category;
-      const categoryToRenderProductsFor = categories.find(category => category.link === chosenCategory)
-      const products = categoryToRenderProductsFor.products;
-      this.setState({productsToShow: [...this.state.productsToShow, products]}) //TODO: FIX THIS
-    }catch(e){
-
+  filterPresent = () => {
+    if(window.location.href.includes('?')){
+      return true
     }
+    return false;
   }
 
   selectedCategory = () => {
     try {
       const chosenCategory = this.props.chosenCategory.category;
-      const categoryToRenderProductsFor = categories.find(category => category.link === chosenCategory)
+      const categoryToRenderProductsFor = categories.find(category => category.link === chosenCategory);
       return categoryToRenderProductsFor.link;
     }catch(e){
 
     }
   }
 
-  componentDidMount = () => {
-    this.productsToRender()
-  }
-
-  filterWithParams = (param) => {
-    const paramType = param.split('=')[0]
-    const value = param.split('=')[1]
-    switch (paramType) {
-      case 'cost': {
-        const filteredProducts = this.state.productsToShow[0].filter(products => products.cost <= 100)
-        // this.setState({productsToShow: [...this.state.productsToShow, filteredProducts]})
-        console.log('yo yo yo');
-      }
-      case 'color': {
-        return ['color', param[1], 'includes']
-      }
-      default:
-        return ''
-    }
-  }
-
   render(){
-    console.log(this.state.productsToShow[0], 'should be state');
     return(
       <div className="productsList">
         {
-          this.state.productsToShow[0] ?
-          this.filterWithParams(getParams()) &&
-          this.state.productsToShow[0].map(product => (
+          this.props.productsToRender ?
+          this.props.productsToRender.map(product => (
           <div className="product">
-            <Link to={`/categories/${this.selectedCategory().link}/${product.id}`} >{product.name}</Link>
+            <Link to={`/categories/${this.selectedCategory()}/${product.id}`} >{product.name}</Link>
             <div>name: {product.name}</div>
             <div>£{product.cost}</div>
             <div>color: {product.color}</div>
@@ -71,7 +48,7 @@ class Products extends React.Component {
         ))
         :
         <div> Sorry we did not find that product page </div>
-      }
+        }
       </div>
     )
   }
