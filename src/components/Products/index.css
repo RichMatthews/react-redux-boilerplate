@@ -8,3 +8,7 @@
 .productsList{
   display: flex;
 }
+.productsListingPage{
+  display: flex;
+  flex-direction: row;
+}

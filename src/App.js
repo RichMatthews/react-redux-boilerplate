@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ConnectedRouter } from "react-router-redux";
-import { Route } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Home from '../src/components/home';
 import Categories from '../src/components/Categories';
 import Products from '../src/components/Products';
@@ -16,13 +16,24 @@ class App extends React.Component {
     return (
       <ConnectedRouter history={history}>
         <div>
-          <Route path="/" exact component={Home} />
-          <Route path="/categories" exact component={Categories} />
-          <Route path={`/categories/${chosenCategory.category}`} exact component={Products} />
-          <Route
-            path={`/categories/${chosenCategory.category}/${chosenCategory.product}`}
-            component={ProductPage}
-          />
+          <Switch>
+            <Route path="/" exact component={Home} />
+            <Route
+              exact
+              path="/categories"
+              render={(props) => <Categories {...props} />}
+            />
+            <Route
+              exact
+              path={`/categories/${chosenCategory.category}`}
+              render={(props) => <Products {...props} />}
+            />
+            <Route
+              exact
+              path={`/categories/${chosenCategory.category}/${chosenCategory.product}`}
+              component={ProductPage}
+            />
+          </Switch>
         </div>
       </ConnectedRouter>
     );

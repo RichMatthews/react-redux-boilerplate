@@ -34,6 +34,18 @@ export default [
         name: 'Arsenal football shirt',
         cost: 1,
         color: 'red'
+      },
+      {
+        id: 6000,
+        name: 'Real Betis football shirt',
+        cost: 45,
+        color: 'green'
+      },
+      {
+        id: 7000,
+        name: 'Villareal football shirt',
+        cost: 65,
+        color: 'yellow'
       }
     ]
   },
