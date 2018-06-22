@@ -15,14 +15,12 @@ class Filters extends React.Component {
         { value: 'green', text: 'green', checked: false },
         { value: 'yellow', text: 'yellow', checked: false },
       ],
-    params: []
+    params: [],
+    maxPrice: 200,
+    costParam: 0
   }
 
   componentDidMount = () => {
-    this.syncParamsWithState()
-  }
-
-  syncParamsWithState = () => {
     this.grabParams()
   }
 
@@ -35,47 +33,61 @@ class Filters extends React.Component {
     try{
       const params = this.props.location.search
       const splitParams = params.split('=')
+      const paramType = splitParams[0].split('?')
       const newParams = splitParams[1].split(',')
       newParams.forEach(param => (
         this.setState(prevState => (
           {params: [...prevState.params, param]}
         ))
       ))
-      this.renderProducts()
+      this.renderProducts(paramType)
     }
     catch(e){
     }
   }
 
-  configureParams = () => {
-    if(this.state.params.length === 0){
+  configureParams = (paramType) => {
+    if(paramType === 'cost'){
       this.props.history.push({
-        pathname: '/categories/sport',
+        pathname: `/categories/${this.props.chosenCategory.category}`,
+        search: `?${paramType}=${this.state.costParam}`
+      })
+    }
+    else if(this.state.params.length === 0){
+      this.props.history.push({
+        pathname: `/categories/${this.props.chosenCategory.category}`,
         search: ''
       })
     }
     else {
       this.props.history.push({
-        pathname: '/categories/sport',
-        search: `?color=${this.state.params.join(',')}`
+        pathname: `/categories/${this.props.chosenCategory.category}`,
+        search: `?${paramType}=${this.state.params.join(',')}`
       })
     }
     this.renderProducts()
   }
 
-  findParams = (param) => {
+  findParams = (param, paramType) => {
     const paramInUrl = this.state.params.find(par => par === param)
-    if(paramInUrl){
+    if (paramType === 'cost'){
+      this.setState({costParam: param}, () => this.configureParams(paramType))
+    }
+    else if(paramInUrl){
       const removeParam = this.state.params.filter(par => par !== param)
-      this.setState({params: removeParam}, () => this.configureParams())
+      this.setState({params: removeParam}, () => this.configureParams(paramType))
     }
     else {
-      this.setState({params: [...this.state.params, param]}, () => this.configureParams())
+      this.setState({params: [...this.state.params, param]}, () => this.configureParams(paramType))
     }
   }
 
   isParamChecked = (param) => {
     return this.state.params.find(par => par === param)
+  }
+
+  changePrice = (value) => {
+    this.setState({maxPrice: value}, this.props.showProducts(this.props.chosenCategory.category, 'cost', value))
   }
 
   render(){
@@ -88,13 +100,24 @@ class Filters extends React.Component {
             <li key={index}>
               <input
                 type="checkbox"
-                onClick={() => this.findParams(option.text)}
+                onClick={() => this.findParams(option.text, 'color')}
                 onChange={this.renderProducts}
                 defaultChecked={this.isParamChecked(option.text)}
               />
               <label>{option.text}</label>
             </li>
           ))}
+        </div>
+        <div>
+          <h5>Price</h5>
+          <input
+            type="range"
+            min="1"
+            max="200"
+            value={this.state.maxPrice}
+            onChange={(e) => this.findParams(e.target.value, 'cost')}
+          />
+          <p> Value: £{this.state.maxPrice}</p>
         </div>
       </div>
     )

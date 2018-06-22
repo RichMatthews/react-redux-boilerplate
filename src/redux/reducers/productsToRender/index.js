@@ -8,7 +8,6 @@ export default(state = initialState, action) => {
       try{
         switch(action.filter.type){
           case 'color': {
-            console.log(action, 'ac');
             const productsToShow = data.filter(category => category.link === action.category);
             const values = action.filter.value.split(',')
             if(values.length === 1){
@@ -28,6 +27,7 @@ export default(state = initialState, action) => {
             }
           }
           case 'cost': {
+            console.log(action, 'acho');
             const productsToShow = data.filter(category => category.link === action.category);
             const filteredProducts = productsToShow[0].products.filter(products => products[action.filter.type] <= action.filter.value)
             return filteredProducts;

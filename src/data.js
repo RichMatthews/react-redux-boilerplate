@@ -58,12 +58,14 @@ export default [
       {
         id: 1000,
         name: 'Atlas',
-        cost: 30
+        cost: 30,
+        color: 'blue'
       },
       {
         id: 2000,
         name: 'Map',
-        cost: 85
+        cost: 85,
+        color: 'white'
       }
     ]
   },

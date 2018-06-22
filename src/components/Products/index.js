@@ -19,7 +19,6 @@ class Products extends React.Component {
     }catch(e){
       this.props.showProducts(this.props.chosenCategory.category)
     }
-    // this.props.showProducts(this.props.chosenCategory.category)
   }
 
   selectedCategory = () => {
@@ -41,13 +40,12 @@ class Products extends React.Component {
         this.props.showProducts(this.props.chosenCategory.category, type, value)
       }
       catch(e){
-        
+
       }
      }
   }
 
   render(){
-    console.log(this.props, 'proooops');
     return(
       <div>
         <h3> Products </h3>
