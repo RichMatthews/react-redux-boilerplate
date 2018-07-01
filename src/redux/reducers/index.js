@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import chosenCategory from './chosenCategory';
+import users from './users';
 
 const rootReducer = combineReducers({
-  chosenCategory,
+  users,
 });
 
 export default rootReducer;

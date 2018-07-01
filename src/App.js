@@ -5,7 +5,7 @@ import { Route } from "react-router-dom";
 import { mapStateToProps, mapDispatchToProps } from './redux/mappingFunctions';
 import Home from './components/home'
 import { history } from './index'
-import './App.css';
+
 
 class App extends React.Component {
   render() {
