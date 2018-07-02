@@ -1,18 +1,29 @@
 import axios from "axios";
-import { FETCH_USERS, UPDATE_USER } from "../../types";
+import { UPDATE_USER, FETCHING_USERS, FETCHING_USERS_FAILED, FETCHING_USERS_SUCCEEDED } from "../../types";
+
+export const fetchingUsers = () => {
+  return async (dispatch) => {
+    dispatch({ type: FETCHING_USERS })
+  }
+}
+
 export const fetchUsers = () => {
   const request = axios.get("https://jsonplaceholder.typicode.com/users");
 
   return async (dispatch, getState) => {
-    const users = await request;
-    const userData = users.data;
-    dispatch({ type: FETCH_USERS, userData });
+
+    try {
+      const users = await request;
+      const userData = users.data;
+      dispatch({ type: FETCHING_USERS_SUCCEEDED, userData });
+    }
+    catch(err){
+        dispatch({type: FETCHING_USERS_FAILED, err})
+    }
   };
 };
 
 export const updateUser = (oldName, newName) => {
-  console.log(oldName, "oldName");
-  console.log(newName, "newName");
   return {
     type: UPDATE_USER,
     oldName: oldName,

@@ -1,2 +1,4 @@
-export const FETCH_USERS = "action/FETCH_USERS";
+export const FETCHING_USERS = "action/FETCHING_USERS";
+export const FETCHING_USERS_FAILED = "action/FETCHING_USERS_FAILED";
+export const FETCHING_USERS_SUCCEEDED = "action/FETCHING_USERS_SUCCEEDED";
 export const UPDATE_USER = "action/UPDATE_USER";

@@ -4,13 +4,18 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from "../../redux/mappingFunctions";
-
+import Loading from '../../components/Loading'
 class Home extends React.Component {
   state = {
     users: [],
     name: "",
     oldName: ""
   };
+
+  componentDidMount = () => {
+    this.props.fetchingUsers()
+    this.props.fetchUsers()
+  }
 
   updateUserName = (e, oldName) => {
     this.setState({ name: e.target.value });
@@ -21,9 +26,8 @@ class Home extends React.Component {
     return (
       <div>
         Home is here
-        <button onClick={() => this.props.fetchUsers()}>Fetch Users</button>
-        {this.props.users && this.props.users.length > 0
-          ? this.props.users.map(user => (
+        {this.props.users.users && this.props.users.users.length > 0
+          ? this.props.users.users.map(user => (
               <div>
                 <div>{user.name}</div>{" "}
                 <input
@@ -39,7 +43,7 @@ class Home extends React.Component {
                 </button>
               </div>
             ))
-          : null}
+          : <Loading />}
       </div>
     );
   }
