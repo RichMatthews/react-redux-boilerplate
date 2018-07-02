@@ -1,14 +1,16 @@
-import Types from '../types';
+import Types from "../types";
+import { bindActionCreators } from "redux";
+import { fetchUsers, updateUser } from "../actionCreators/users";
 
 export const mapStateToProps = state => ({
+  users: state.users
 });
 
-export const mapDispatchToProps = (dispatch) => ({
-  fetchUsers: (users) => {
-    console.log(users, 'the users');
-    dispatch({
-      type: Types.FETCH_USERS,
-      users,
-    })
-  }
-});
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchUsers,
+      updateUser
+    },
+    dispatch
+  );
