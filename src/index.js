@@ -4,13 +4,11 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import { routerMiddleware } from "react-router-redux";
 import thunk from "redux-thunk";
-import createHistory from "history/createBrowserHistory";
 import "./index.css";
 import App from "./App";
-import reducer from "./redux/reducers";
+import reducer from "app/redux/reducers";
 import registerServiceWorker from "./registerServiceWorker";
 
-export const history = createHistory();
 const enhancers = [applyMiddleware(thunk)];
 const enhancer = compose(
   ...enhancers,

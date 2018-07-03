@@ -3,7 +3,7 @@ import {
   UPDATE_USER,
   FETCHING_USERS_SUCCEEDED,
   FETCHING_USERS_FAILED
-} from "../../../redux/types";
+} from "app/redux/types";
 const initialState = {
   users: [],
   loading: false

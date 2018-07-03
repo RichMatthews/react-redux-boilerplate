@@ -1,6 +1,6 @@
 import React from "react";
-import Users from "../Users";
-import UserDetails from "../UserDetails";
+import Users from "app/components/Users";
+import UserDetails from "app/components/UserDetails";
 import "./index.css";
 
 const component = () => (

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import {
   mapStateToProps,
   mapDispatchToProps
-} from "../../redux/mappingFunctions";
+} from "app/redux/mappingFunctions";
 
 const UserDetails = props => (
   <div>

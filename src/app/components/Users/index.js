@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import {
   mapStateToProps,
   mapDispatchToProps
-} from "../../redux/mappingFunctions";
-import Loading from "../../components/Loading";
+} from "app/redux/mappingFunctions";
+import Loading from "app/components/Loading";
 
 class Users extends React.Component {
   state = {

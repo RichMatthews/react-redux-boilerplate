@@ -1,4 +1,4 @@
-import { USER_SELECTED } from "../../../redux/types";
+import { USER_SELECTED } from "app/redux/types";
 const initialState = {};
 
 export default (state = initialState, action) => {
