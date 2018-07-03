@@ -1,20 +1,22 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { ConnectedRouter } from "react-router-redux";
-import { Route } from "react-router-dom";
-import { mapStateToProps, mapDispatchToProps } from './redux/mappingFunctions';
-import Home from './components/home'
-import { history } from './index'
-
+import React from "react";
+import { connect } from "react-redux";
+import { mapStateToProps, mapDispatchToProps } from "./redux/mappingFunctions";
+import Wrapper from "./components/Wrapper";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 class App extends React.Component {
   render() {
     return (
       <div>
-        <Home />
+        <ErrorBoundary>
+          <Wrapper />
+        </ErrorBoundary>
       </div>
     );
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
