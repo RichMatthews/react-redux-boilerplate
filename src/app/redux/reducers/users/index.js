@@ -51,6 +51,7 @@ export default (state = initialState, action) => {
     case FETCHING_USERS_FAILED: {
       return {
         ...state,
+        loading: false,
         error: "404 - Request to fetch users failed"
       };
     }
