@@ -5,23 +5,75 @@ import {
   mapDispatchToProps
 } from "app/redux/mappingFunctions";
 
-const UserDetails = props => (
-  <div>
-    {console.log(props.selectedUser, "props")}
-    {props.selectedUser ? (
+class UserDetails extends React.Component {
+  state = {
+    id: "",
+    name: "",
+    username: "",
+    email: ""
+  };
+
+  componentDidUpdate(prevProps) {
+    if (this.props.selectedUser.name !== prevProps.selectedUser.name) {
+      const { id, name, username, email } = this.props.selectedUser;
+      this.setState({ id: id });
+      this.setState({ name: name });
+      this.setState({ username: username });
+      this.setState({ email: email });
+    }
+  }
+
+  handleChange = e => {
+    const { value, name } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  render() {
+    return (
       <div>
-        <h3> user details </h3>
-        <input value={props.selectedUser.id} />
-        <div>id {props.selectedUser.id}</div>
-        <div>name {props.selectedUser.name}</div>
-        <div>username {props.selectedUser.username}</div>
-        <div>email {props.selectedUser.email}</div>
+        {this.props.selectedUser ? (
+          <div>
+            <h3> user details </h3>
+            <div>
+              <input
+                name="id"
+                value={this.state.id}
+                disabled
+                onChange={e => this.handleChange(e)}
+              />{" "}
+            </div>
+            <div>
+              <input
+                name="name"
+                value={this.state.name}
+                onChange={e => this.handleChange(e)}
+              />{" "}
+            </div>
+            <div>
+              <input
+                name="username"
+                value={this.state.username}
+                onChange={e => this.handleChange(e)}
+              />{" "}
+            </div>
+            <div>
+              <input
+                name="email"
+                value={this.state.email}
+                onChange={e => this.handleChange(e)}
+              />{" "}
+            </div>
+            <button onClick={() => this.props.updateUser(this.state)}>
+              Save
+            </button>
+          </div>
+        ) : (
+          <div> No user selected </div>
+        )}
       </div>
-    ) : (
-      <div> No user selected </div>
-    )}
-  </div>
-);
+    );
+  }
+}
 
 export default connect(
   mapStateToProps,

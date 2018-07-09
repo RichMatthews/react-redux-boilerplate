@@ -26,10 +26,9 @@ export const fetchUsers = () => {
   };
 };
 
-export const updateUser = (oldName, newName) => {
+export const updateUser = updatedUser => {
   return {
     type: UPDATE_USER,
-    oldName: oldName,
-    newName: newName
+    updatedUser
   };
 };

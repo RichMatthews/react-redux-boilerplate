@@ -18,11 +18,6 @@ class Users extends React.Component {
     this.props.fetchUsers();
   };
 
-  updateUserName = (e, oldName) => {
-    this.setState({ name: e.target.value });
-    this.setState({ oldName: oldName });
-  };
-
   render() {
     return (
       <div>
@@ -31,10 +26,6 @@ class Users extends React.Component {
           this.props.users.users.map(user => (
             <div>
               <div>{user.name}</div>{" "}
-              <input
-                placeholder="enter new name"
-                onChange={e => this.updateUserName(e, user.name)}
-              />
               <button onClick={() => this.props.selectUser(user)}>
                 Update User
               </button>

@@ -18,14 +18,17 @@ export default (state = initialState, action) => {
       };
     }
     case UPDATE_USER: {
+      console.log(action, "this is the action");
       return {
         ...state,
         users: state.users.map(
           user =>
-            user.name === action.oldName
+            user.id === action.updatedUser.id
               ? {
                   ...user,
-                  name: action.newName
+                  name: action.updatedUser.name,
+                  username: action.updatedUser.username,
+                  email: action.updatedUser.email
                 }
               : user
         )
