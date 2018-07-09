@@ -1,5 +1,6 @@
 import {
   FETCHING_USERS,
+  DELETE_USER,
   UPDATE_USER_DETAILS,
   FETCHING_USERS_SUCCEEDED,
   FETCHING_USERS_FAILED
@@ -18,7 +19,6 @@ export default (state = initialState, action) => {
       };
     }
     case UPDATE_USER_DETAILS: {
-      console.log(action, "this is the action");
       return {
         ...state,
         users: state.users.map(
@@ -32,6 +32,12 @@ export default (state = initialState, action) => {
                 }
               : user
         )
+      };
+    }
+    case DELETE_USER: {
+      return {
+        ...state,
+        users: state.users.filter(u => u.id !== action.user.id)
       };
     }
     case FETCHING_USERS_SUCCEEDED: {

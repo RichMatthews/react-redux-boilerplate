@@ -4,6 +4,7 @@ import {
   mapStateToProps,
   mapDispatchToProps
 } from "app/redux/mappingFunctions";
+import "./index.css";
 
 class UserDetails extends React.Component {
   state = {

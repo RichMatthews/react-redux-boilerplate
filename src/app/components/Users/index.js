@@ -5,6 +5,7 @@ import {
   mapDispatchToProps
 } from "app/redux/mappingFunctions";
 import Loading from "app/components/Loading";
+import "./index.css";
 
 class Users extends React.Component {
   state = {
@@ -24,10 +25,13 @@ class Users extends React.Component {
         <h3> Users </h3>
         {this.props.users.users && this.props.users.users.length > 0 ? (
           this.props.users.users.map(user => (
-            <div>
+            <div className="user">
               <div>{user.name}</div>{" "}
               <button onClick={() => this.props.selectUser(user)}>
-                Update User
+                Update
+              </button>
+              <button onClick={() => this.props.deleteUser(user)}>
+                Delete
               </button>
             </div>
           ))

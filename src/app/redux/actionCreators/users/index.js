@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   UPDATE_USER_DETAILS,
   FETCHING_USERS,
+  DELETE_USER,
   FETCHING_USERS_FAILED,
   FETCHING_USERS_SUCCEEDED
 } from "app/redux/types";
@@ -30,5 +31,12 @@ export const updateUserDetails = updatedUser => {
   return {
     type: UPDATE_USER_DETAILS,
     updatedUser
+  };
+};
+
+export const deleteUser = user => {
+  return {
+    type: DELETE_USER,
+    user
   };
 };
