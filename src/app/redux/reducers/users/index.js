@@ -1,6 +1,6 @@
 import {
   FETCHING_USERS,
-  UPDATE_USER,
+  UPDATE_USER_DETAILS,
   FETCHING_USERS_SUCCEEDED,
   FETCHING_USERS_FAILED
 } from "app/redux/types";
@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
         loading: true
       };
     }
-    case UPDATE_USER: {
+    case UPDATE_USER_DETAILS: {
       console.log(action, "this is the action");
       return {
         ...state,

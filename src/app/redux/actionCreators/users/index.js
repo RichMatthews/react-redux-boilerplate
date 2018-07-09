@@ -1,6 +1,6 @@
 import axios from "axios";
 import {
-  UPDATE_USER,
+  UPDATE_USER_DETAILS,
   FETCHING_USERS,
   FETCHING_USERS_FAILED,
   FETCHING_USERS_SUCCEEDED
@@ -26,9 +26,9 @@ export const fetchUsers = () => {
   };
 };
 
-export const updateUser = updatedUser => {
+export const updateUserDetails = updatedUser => {
   return {
-    type: UPDATE_USER,
+    type: UPDATE_USER_DETAILS,
     updatedUser
   };
 };

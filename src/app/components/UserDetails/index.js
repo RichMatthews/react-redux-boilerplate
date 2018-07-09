@@ -63,7 +63,7 @@ class UserDetails extends React.Component {
                 onChange={e => this.handleChange(e)}
               />{" "}
             </div>
-            <button onClick={() => this.props.updateUser(this.state)}>
+            <button onClick={() => this.props.updateUserDetails(this.state)}>
               Save
             </button>
           </div>
