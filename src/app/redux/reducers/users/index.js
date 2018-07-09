@@ -7,7 +7,8 @@ import {
 } from "app/redux/types";
 const initialState = {
   users: [],
-  loading: false
+  loading: false,
+  error: ""
 };
 
 export default (state = initialState, action) => {
@@ -43,11 +44,15 @@ export default (state = initialState, action) => {
     case FETCHING_USERS_SUCCEEDED: {
       return {
         ...state,
+        loading: false,
         users: [].concat(...state.users).concat(action.userData)
       };
     }
     case FETCHING_USERS_FAILED: {
-      return state;
+      return {
+        ...state,
+        error: "404 - Request to fetch users failed"
+      };
     }
     default:
       return state;

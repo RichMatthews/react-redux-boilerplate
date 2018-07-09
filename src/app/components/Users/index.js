@@ -23,6 +23,7 @@ class Users extends React.Component {
     return (
       <div>
         <h3> Users </h3>
+        {this.props.users.loading ? <Loading /> : null}
         {this.props.users.users && this.props.users.users.length > 0 ? (
           this.props.users.users.map(user => (
             <div className="user">
@@ -36,7 +37,7 @@ class Users extends React.Component {
             </div>
           ))
         ) : (
-          <Loading />
+          <div>{this.props.users.error}</div>
         )}
       </div>
     );
