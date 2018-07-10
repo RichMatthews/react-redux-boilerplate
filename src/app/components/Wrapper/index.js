@@ -8,7 +8,7 @@ import "./index.css";
 const pullFromFirebase = () => {
   return firebase
     .database()
-    .ref("userdetails-368d3")
+    .ref("/")
     .once("value")
     .then(snapshot => {
       console.log(snapshot.val(), "users");
