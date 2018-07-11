@@ -6,7 +6,8 @@ import "./index.css";
 const component = () => (
   <div className="wrapper-container">
     {" "}
-    <Users /> <UserDetails />
+    <Users />
+    <UserDetails />
   </div>
 );
 
