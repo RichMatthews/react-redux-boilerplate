@@ -20,7 +20,6 @@ const component = () => (
     {" "}
     <Users />
     <UserDetails />
-    <button onClick={pullFromFirebase}>test firebase</button>
   </div>
 );
 
