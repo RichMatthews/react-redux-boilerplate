@@ -43,7 +43,6 @@ export default (state = initialState, action) => {
       };
     }
     case ADD_USER: {
-      console.log(action, " the actuion");
       return {
         ...state,
         users: [].concat(...state.users).concat(action.newUser)

@@ -1,6 +1,7 @@
 import React from "react";
 import Users from "app/components/Users";
 import UserDetails from "app/components/UserDetails";
+import NewUser from "app/components/NewUser";
 import "./index.css";
 
 const component = () => (
@@ -8,6 +9,7 @@ const component = () => (
     {" "}
     <Users />
     <UserDetails />
+    <NewUser />
   </div>
 );
 

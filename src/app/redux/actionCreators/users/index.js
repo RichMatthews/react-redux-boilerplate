@@ -70,7 +70,6 @@ export const updateUserDetailsThenUpdateFirebase = updatedUser => {
 };
 
 export const addUserToStoreThenUpdateFirebase = newUser => {
-  console.log(newUser, "nu");
   return (dispatch, getState) => {
     return dispatch(addUser(newUser)).then(() => {
       return writeStoreDataToFirebase(newUser);
