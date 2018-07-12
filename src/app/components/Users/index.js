@@ -20,13 +20,13 @@ class Users extends React.Component {
   };
 
   render() {
-    console.log(this.props);
+    const { users } = this.props;
     return (
       <div>
         <h3> Users </h3>
-        {this.props.users.loading ? <Loading /> : null}
-        {this.props.users.users && this.props.users.users.length > 0 ? (
-          this.props.users.users.map(user => (
+        {users.loading ? <Loading /> : null}
+        {users.users && users.users.length > 0 ? (
+          users.users.map(user => (
             <div className="user">
               <div>{user.name}</div>{" "}
               <button onClick={() => this.props.selectUser(user)}>
@@ -38,7 +38,7 @@ class Users extends React.Component {
             </div>
           ))
         ) : (
-          <div>{this.props.users.error}</div>
+          <div>{users.error}</div>
         )}
       </div>
     );

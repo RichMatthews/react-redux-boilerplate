@@ -29,9 +29,11 @@ class NewUser extends React.Component {
   };
 
   render() {
+    const { users } = this.props;
+    console.log(users, "the users");
     return (
       <div>
-        {this.props.users.users && this.props.users.users.length > 1 ? (
+        {users && users.length > 1 ? (
           <div>
             <h3> Add new user </h3>
             <div>
