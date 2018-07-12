@@ -3,7 +3,8 @@ import {
   DELETE_USER,
   UPDATE_USER_DETAILS,
   FETCHING_USERS_SUCCEEDED,
-  FETCHING_USERS_FAILED
+  FETCHING_USERS_FAILED,
+  ADD_USER
 } from "app/redux/types";
 const initialState = {
   users: [],
@@ -39,6 +40,13 @@ export default (state = initialState, action) => {
       return {
         ...state,
         users: state.users.filter(u => u.id !== action.user.id)
+      };
+    }
+    case ADD_USER: {
+      console.log(action, " the actuion");
+      return {
+        ...state,
+        users: [].concat(...state.users).concat(action.newUser)
       };
     }
     case FETCHING_USERS_SUCCEEDED: {

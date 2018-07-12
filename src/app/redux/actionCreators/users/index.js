@@ -5,17 +5,30 @@ import {
   FETCHING_USERS,
   DELETE_USER,
   FETCHING_USERS_FAILED,
-  FETCHING_USERS_SUCCEEDED
+  FETCHING_USERS_SUCCEEDED,
+  ADD_USER
 } from "app/redux/types";
 import "app/config";
 
 export const pullFromFirebase = () => {
   return firebase
     .database()
-    .ref("/")
+    .ref("/users")
     .once("value")
     .then(snapshot => {
       return snapshot.val();
+    });
+};
+
+export const writeStoreDataToFirebase = ({ id, name, username, email }) => {
+  return firebase
+    .database()
+    .ref("/users/" + id)
+    .set({
+      id: id,
+      name: name,
+      username: username,
+      email: email
     });
 };
 
@@ -39,9 +52,35 @@ export const fetchUsers = () => {
 };
 
 export const updateUserDetails = updatedUser => {
-  return {
-    type: UPDATE_USER_DETAILS,
-    updatedUser
+  return async dispatch => {
+    dispatch({ type: UPDATE_USER_DETAILS, updatedUser });
+  };
+};
+
+export const updateUserDetailsThenUpdateFirebase = updatedUser => {
+  return (dispatch, getState) => {
+    return dispatch(updateUserDetails(updatedUser)).then(() => {
+      const foundUser = getState().selectedUser;
+      const userToUpdate = getState().users.users.filter(
+        user => user.id === foundUser.id
+      );
+      return writeStoreDataToFirebase(userToUpdate[0]);
+    });
+  };
+};
+
+export const addUserToStoreThenUpdateFirebase = newUser => {
+  console.log(newUser, "nu");
+  return (dispatch, getState) => {
+    return dispatch(addUser(newUser)).then(() => {
+      return writeStoreDataToFirebase(newUser);
+    });
+  };
+};
+
+export const addUser = user => {
+  return async dispatch => {
+    dispatch({ type: ADD_USER, newUser: user });
   };
 };
 

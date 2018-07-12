@@ -2,7 +2,8 @@ import { bindActionCreators } from "redux";
 import {
   fetchingUsers,
   fetchUsers,
-  updateUserDetails,
+  updateUserDetailsThenUpdateFirebase,
+  addUserToStoreThenUpdateFirebase,
   deleteUser
 } from "app/redux/actionCreators/users";
 import { selectUser } from "app/redux/actionCreators/userDetails";
@@ -16,10 +17,11 @@ export const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       fetchUsers,
-      updateUserDetails,
       fetchingUsers,
       selectUser,
-      deleteUser
+      deleteUser,
+      updateUserDetailsThenUpdateFirebase,
+      addUserToStoreThenUpdateFirebase
     },
     dispatch
   );

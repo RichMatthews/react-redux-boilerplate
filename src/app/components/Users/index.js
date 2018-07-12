@@ -24,6 +24,18 @@ class Users extends React.Component {
       <div>
         <h3> Users </h3>
         {this.props.users.loading ? <Loading /> : null}
+        <button
+          onClick={() =>
+            this.props.addUserToStoreThenUpdateFirebase({
+              id: 4,
+              name: "new person",
+              username: "new username",
+              email: "new email"
+            })
+          }
+        >
+          Add User
+        </button>
         {this.props.users.users && this.props.users.users.length > 0 ? (
           this.props.users.users.map(user => (
             <div className="user">
