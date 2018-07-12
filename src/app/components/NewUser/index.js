@@ -16,7 +16,7 @@ class NewUser extends React.Component {
   componentDidMount = () => {
     setTimeout(
       function() {
-        const newUserId = this.props.users.users.length;
+        const newUserId = this.props.users.length;
         this.setState({ id: newUserId });
       }.bind(this),
       1000
@@ -30,7 +30,6 @@ class NewUser extends React.Component {
 
   render() {
     const { users } = this.props;
-    console.log(users, "the users");
     return (
       <div>
         {users && users.length > 1 ? (

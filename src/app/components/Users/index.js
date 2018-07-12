@@ -25,8 +25,8 @@ class Users extends React.Component {
       <div>
         <h3> Users </h3>
         {users.loading ? <Loading /> : null}
-        {users.users && users.users.length > 0 ? (
-          users.users.map(user => (
+        {users && users.length > 0 ? (
+          users.map(user => (
             <div className="user">
               <div>{user.name}</div>{" "}
               <button onClick={() => this.props.selectUser(user)}>

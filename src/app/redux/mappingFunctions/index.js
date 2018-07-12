@@ -9,7 +9,8 @@ import {
 import { selectUser } from "app/redux/actionCreators/userDetails";
 
 export const mapStateToProps = state => ({
-  users: state.users,
+  users: state.users.users,
+  usersLoading: state.users.loading,
   selectedUser: state.selectedUser
 });
 
