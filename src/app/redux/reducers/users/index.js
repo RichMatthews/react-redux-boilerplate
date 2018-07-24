@@ -4,7 +4,8 @@ import {
   UPDATE_USER_DETAILS,
   FETCHING_USERS_SUCCEEDED,
   FETCHING_USERS_FAILED,
-  ADD_USER
+  ADD_USER,
+  ADDING_USER
 } from "app/redux/types";
 const initialState = {
   users: [],
@@ -60,6 +61,12 @@ export default (state = initialState, action) => {
         ...state,
         loading: false,
         error: "404 - Request to fetch users failed"
+      };
+    }
+    case ADDING_USER: {
+      return {
+        ...state,
+        loading: true
       };
     }
     default:

@@ -32,7 +32,11 @@ class Users extends React.Component {
               <button onClick={() => this.props.selectUser(user)}>
                 Update
               </button>
-              <button onClick={() => this.props.deleteUser(user)}>
+              <button
+                onClick={() =>
+                  this.props.deleteUserFromStoreThenUpdateFirebase(user)
+                }
+              >
                 Delete
               </button>
             </div>

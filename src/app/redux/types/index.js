@@ -6,5 +6,6 @@ export const DELETE_USER = "action/DELETE_USER";
 export const ADD_USER = "action/ADD_USER";
 export const USER_SELECTED_UPDATED = "action/USER_SELECTED_UPDATED";
 export const LOAD_USER_DETAILS = "action/LOAD_USER_DETAILS";
+export const ADDING_USER = "action/ADDING_USER";
 export const LOADING_USERS_DETAILS_FAILED =
   "action/LOADING_USERS_DETAILS_FAILED";

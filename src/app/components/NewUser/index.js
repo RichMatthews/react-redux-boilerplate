@@ -9,18 +9,7 @@ class NewUser extends React.Component {
   state = {
     name: "",
     username: "",
-    id: 0,
     email: ""
-  };
-
-  componentDidMount = () => {
-    setTimeout(
-      function() {
-        const newUserId = this.props.users.length;
-        this.setState({ id: newUserId });
-      }.bind(this),
-      1000
-    );
   };
 
   handleChange = e => {
@@ -32,15 +21,20 @@ class NewUser extends React.Component {
     const { users } = this.props;
     return (
       <div>
-        {users && users.length > 1 ? (
+        {users && users.length > 0 ? (
           <div>
             <h3> Add new user </h3>
             <div>
-              <input name="id" value={this.state.id} disabled />{" "}
+              <input
+                name="id"
+                placeholder="user id generated on the fly"
+                disabled
+              />{" "}
             </div>
             <div>
               <input
                 name="name"
+                placeholder="name"
                 value={this.state.name}
                 onChange={e => this.handleChange(e)}
               />{" "}
@@ -48,6 +42,7 @@ class NewUser extends React.Component {
             <div>
               <input
                 name="username"
+                placeholder="username"
                 value={this.state.username}
                 onChange={e => this.handleChange(e)}
               />{" "}
@@ -55,6 +50,7 @@ class NewUser extends React.Component {
             <div>
               <input
                 name="email"
+                placeholder="email"
                 value={this.state.email}
                 onChange={e => this.handleChange(e)}
               />{" "}

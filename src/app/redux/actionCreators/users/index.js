@@ -6,21 +6,52 @@ import {
   DELETE_USER,
   FETCHING_USERS_FAILED,
   FETCHING_USERS_SUCCEEDED,
-  ADD_USER
+  ADD_USER,
+  ADDING_USER
 } from "app/redux/types";
 import "app/config";
+
+export const refresh = () => {
+  window.location.reload();
+};
 
 export const pullFromFirebase = () => {
   return firebase
     .database()
-    .ref("/users")
+    .ref("/users/")
     .once("value")
     .then(snapshot => {
-      return snapshot.val();
+      var users = [];
+      let usersObj = snapshot.val();
+      for (var user_id in usersObj) {
+        users.push({ ...usersObj[user_id], id: user_id });
+      }
+      return users;
     });
 };
 
-export const writeStoreDataToFirebase = ({ id, name, username, email }) => {
+export const deleteUserFromFirebase = ({ id, name, username, email }) => {
+  return firebase
+    .database()
+    .ref("/users/" + id)
+    .set({
+      id: null
+    });
+};
+
+export const writeStoreDataToFirebase = ({ name, username, email }) => {
+  return firebase
+    .database()
+    .ref("/users/")
+    .push()
+    .set({
+      name: name,
+      username: username,
+      email: email
+    });
+};
+
+export const updateUserInFirebase = ({ id, name, username, email }) => {
   return firebase
     .database()
     .ref("/users/" + id)
@@ -64,7 +95,7 @@ export const updateUserDetailsThenUpdateFirebase = updatedUser => {
       const userToUpdate = getState().users.users.filter(
         user => user.id === foundUser.id
       );
-      return writeStoreDataToFirebase(userToUpdate[0]);
+      return updateUserInFirebase(userToUpdate[0]);
     });
   };
 };
@@ -72,8 +103,26 @@ export const updateUserDetailsThenUpdateFirebase = updatedUser => {
 export const addUserToStoreThenUpdateFirebase = newUser => {
   return (dispatch, getState) => {
     return dispatch(addUser(newUser)).then(() => {
-      return writeStoreDataToFirebase(newUser);
+      return writeStoreDataToFirebase(newUser).then(() => {
+        return dispatch(addingUser()).then(() => {
+          return refresh();
+        });
+      });
     });
+  };
+};
+
+export const deleteUserFromStoreThenUpdateFirebase = user => {
+  return (dispatch, getState) => {
+    return dispatch(deleteUser(user)).then(() => {
+      return deleteUserFromFirebase(user);
+    });
+  };
+};
+
+export const addingUser = () => {
+  return async dispatch => {
+    dispatch({ type: ADDING_USER });
   };
 };
 
@@ -84,8 +133,7 @@ export const addUser = user => {
 };
 
 export const deleteUser = user => {
-  return {
-    type: DELETE_USER,
-    user
+  return async dispatch => {
+    dispatch({ type: DELETE_USER, user: user });
   };
 };

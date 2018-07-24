@@ -4,7 +4,8 @@ import {
   fetchUsers,
   updateUserDetailsThenUpdateFirebase,
   addUserToStoreThenUpdateFirebase,
-  deleteUser
+  deleteUser,
+  deleteUserFromStoreThenUpdateFirebase
 } from "app/redux/actionCreators/users";
 import { selectUser } from "app/redux/actionCreators/userDetails";
 
@@ -20,7 +21,7 @@ export const mapDispatchToProps = dispatch =>
       fetchUsers,
       fetchingUsers,
       selectUser,
-      deleteUser,
+      deleteUserFromStoreThenUpdateFirebase,
       updateUserDetailsThenUpdateFirebase,
       addUserToStoreThenUpdateFirebase
     },
