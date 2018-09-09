@@ -1,3 +1,10 @@
 .wrapper-container{
   display: flex;
+  flex-direction: column;
+}
+
+
+.current-user-container{
+  display: flex;
+  flex-direction: row;
 }

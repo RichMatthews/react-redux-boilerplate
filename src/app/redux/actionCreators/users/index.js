@@ -1,4 +1,3 @@
-import axios from "axios";
 import firebase from "firebase";
 import {
   UPDATE_USER_DETAILS,
@@ -114,9 +113,10 @@ export const addUserToStoreThenUpdateFirebase = newUser => {
 
 export const deleteUserFromStoreThenUpdateFirebase = user => {
   return (dispatch, getState) => {
-    return dispatch(deleteUser(user)).then(() => {
+    return dispatch(deleteUser(user)).then((hello) => {
+      console.log('hello');
       return deleteUserFromFirebase(user);
-    });
+    })
   };
 };
 
@@ -134,6 +134,6 @@ export const addUser = user => {
 
 export const deleteUser = user => {
   return async dispatch => {
-    dispatch({ type: DELETE_USER, user: user });
+    dispatch({ type: DELETE_USER, user: user, reqConfirm: true });
   };
 };

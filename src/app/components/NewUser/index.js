@@ -1,9 +1,16 @@
 import React from "react";
 import { connect } from "react-redux";
+import Loading from "app/components/hocs/Loading";
+import { bindActionCreators } from "redux";
 import {
-  mapStateToProps,
-  mapDispatchToProps
-} from "app/redux/mappingFunctions";
+  fetchingUsers,
+  fetchUsers,
+  updateUserDetailsThenUpdateFirebase,
+  addUserToStoreThenUpdateFirebase,
+  deleteUser,
+  deleteUserFromStoreThenUpdateFirebase
+} from "app/redux/actionCreators/users";
+import { selectUser } from "app/redux/actionCreators/userDetails";
 
 class NewUser extends React.Component {
   state = {
@@ -21,7 +28,6 @@ class NewUser extends React.Component {
     const { users } = this.props;
     return (
       <div>
-        {users && users.length > 0 ? (
           <div>
             <h3> Add new user </h3>
             <div>
@@ -63,13 +69,28 @@ class NewUser extends React.Component {
               Add User
             </button>
           </div>
-        ) : (
-          <div> Loading ... </div>
-        )}
       </div>
     );
   }
 }
+
+export const mapStateToProps = state => ({
+  users: state.users.users,
+});
+
+export const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    {
+      fetchUsers,
+      fetchingUsers,
+      selectUser,
+      deleteUserFromStoreThenUpdateFirebase,
+      updateUserDetailsThenUpdateFirebase,
+      addUserToStoreThenUpdateFirebase
+    },
+    dispatch
+  );
+
 
 export default connect(
   mapStateToProps,
